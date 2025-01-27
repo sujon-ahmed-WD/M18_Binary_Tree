@@ -13,27 +13,44 @@
     }
  };
 
-void level_order(Node* root)
-{
-    queue<Node*>q;
-    q.push(root);
+ void input_tree()
+ {
+    queue<Node*>qu;
+    int val;cin>>val;
+    
+    Node* root=new Node(val);
+    qu.push(root);
 
-    while(!q.empty())
+    while(!qu.empty())
     {
-        // node ka bar korva
-        Node*f=q.front();
-        q.pop();
-        // node ka nea work korva
-        cout<<f->val<<" ";
-        // node childrean push korva
-        if(f->left!=NULL)
-        q.push(f->left);
-        if(f->right!=NULL)
-        q.push(f->right);
+        // step1  qu thaka bar korbo
+        Node*p=qu.front();
+        qu.pop();
+        // step node bar kora ka keso kaj kora
 
+        int l,r; cin>>l>>r;
+        Node*myLift,*myright;
+        if(l==-1) myLift=NULL;
+        else myLift=new Node(l); 
+        if(r==-1) myright=NULL;
+        else myright=new Node(r);
+        p->left=myLift;
+        p->right=myright;
+
+
+        // step 3 child golo ka push kora 
+
+        if(p->left!=NULL)
+        qu.push(p->left);
+        if(p->right)
+        qu.push(p->right);
+        
     }
+ }
 
-}
+ 
+
+ 
 int main()
 {
     Node *root = new Node(10);
@@ -50,6 +67,5 @@ int main()
     b->right = e;
 
     // level_order(root);
-    level_order(root);
     return 0;
 }
